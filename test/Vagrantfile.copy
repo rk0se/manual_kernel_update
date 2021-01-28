@@ -3,7 +3,9 @@ MACHINES = {
   # VM name "kernel update"
   :"kernel-update" => {
               # VM box
-              :box_name => "centos-7-5",
+              :box_name => "rk0se/centos-7-5",
+              # box ver
+              :box_version => "2.0",    
               # VM CPU count
               :cpus => 2,
               # VM RAM size (Mb)
@@ -24,6 +26,7 @@ Vagrant.configure("2") do |config|
       # Set VM base box and hostname
       box.vm.box = boxconfig[:box_name]
       box.vm.host_name = boxname.to_s
+      box.vm.box_version = boxconfig[:box_version]
       # Additional network config if present
       if boxconfig.key?(:net)
         boxconfig[:net].each do |ipconf|
@@ -37,11 +40,11 @@ Vagrant.configure("2") do |config|
         end
       end
       # VM resources config
-      box.vm.provider "virtualbox" do |v|
-        # Set VM RAM size and CPU count
-        v.memory = boxconfig[:memory]
-        v.cpus = boxconfig[:cpus]
-      end
+      #box.vm.provider "virtualbox" do |v|
+      #  # Set VM RAM size and CPU count
+      #  v.memory = boxconfig[:memory]
+      #  v.cpus = boxconfig[:cpus]
+      #end
     end
   end
 end
